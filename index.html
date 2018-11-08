@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> Frogger</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="modal-container" id="modContainer">
+        <div class="modal">
+            <article id="startTalk">
+                <h2>Frogger</h2>
+                <p>
+                    Use the arrow keys to move the player<br>
+                    Avoid the bugs to stay alive<br>
+                    Get to the water(top) to score and win the game<br>
+                    Game restarts at every win and difficulty increases<br>
+                </p>
+                <p>Click 'Start' to start game</p>
+                <button type="button" class="btn" id="start" onclick="toggleModal()">Start</button>
+            </article>
+            <article id="gameOver" class="hide">
+                <h1>Game Over</h1>
+                <button type="reset" class="btn">Restart</button>
+            </article>
+        </div>
+    </div>
+    <main class="container">
+        <div class="headers">
+            <span>Score</span>
+            <span>Live</span>
+            <span>Level</span>
+        </div>
+        <div class="stats" id="stats">
+            <div id="score"></div>
+            <div id="lives">
+                <img src="images/Heart.png" class="live">
+                <img src="images/Heart.png" class="live">
+                <img src="images/Heart.png" class="live" id="live">
+            </div>
+            <div id="level"></div>
+        </div>
+    </main>
+    <script src="js/resources.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/engine.js"></script>
+</body>
+</html>
