@@ -6,10 +6,10 @@ body {
 .container {
     width: 250px;
     /* margin-left: 250px; */
-    position: relative;
-    top: 120px;
-    left: 400px;
-    color: #fff;
+    position: absolute;
+    top: 70px;
+    left: 32%;
+    color: #000;
     font-weight: bold;
     font-size: 1.5em;
 }

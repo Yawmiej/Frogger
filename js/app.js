@@ -1,9 +1,10 @@
+//toggle modal on button click
 function toggleModal() {
     let modal = document.getElementById('modContainer');
     modal.classList.toggle('hide');
 }
 
-
+//changes  text on modal
 function toggleText() {
     let startTalk = document.getElementById('startTalk');
     let overTalk = document.getElementById('gameOver');
@@ -11,17 +12,13 @@ function toggleText() {
     overTalk.classList.toggle('hide');
 }
 
-let scoreValue = 0;
-let score = document.getElementById('score');  
-function setScore() {
-    score.innerHTML = scoreValue;
-}
-setScore();
+let score = document.getElementById('score');
+let scoreValue = parseInt(score.innerHTML);
 
-
+//increase score
 function addScore() {
     scoreValue += 50;
-    setScore();
+    score.innerHTML = scoreValue;
 }
 
 
@@ -34,20 +31,19 @@ function addScore() {
 //     score.innerHTML = scoreValue;
 // }
 
-
-let levelValue = 1;
 let level = document.getElementById('level');
-function setLevel () {
-    level.innerHTML = levelValue;
-}
-setLevel();
+let levelValue = parseInt(level.innerHTML);
+
+//increase level after each win
 function addLevel() {
     levelValue += 1;
-    setLevel();
+    level.innerHTML = levelValue;
 }
 
 
 let lives = document.getElementById('lives');
+
+//decrease lives after collision
 function removeLive() {
     if(lives.firstElementChild){
         lives.removeChild(lives.firstElementChild);
@@ -55,10 +51,10 @@ function removeLive() {
 }
 
 
-function addLive() {
-    let live = document.getElementById('live');
-    lives.appendChild(live);
-}
+// function addLive() {
+//     let live = document.getElementById('live');
+//     lives.appendChild(live);
+// }
 
 let gameOver = false;
 
@@ -66,16 +62,15 @@ let gameOver = false;
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
     "use strict";
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+    //Variables of Enemy
     this.move = 101;
     this.offX = -this.move;
     this.startX = x;
     this.x = x;
     this.y = y + 65;
+
+    // The image/sprite for our enemies, this uses
+    // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.boundary = this.move * 5;
     this.speed = speed;
@@ -87,9 +82,10 @@ var Enemy = function(x, y, speed) {
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
     'use strict';
-    // You should multiply any movement by the dt parameter
+    // Movements multiplied by the dt parameter
     // which will ensure the game runs at the same speed for
-    // all computers.
+    // all computers. Moves the enemy within the frame and
+    //reset its position after exceeding the frame/boundary
     if(this.x < this.boundary) {
         this.x += this.speed * dt;
     } else {
@@ -103,12 +99,17 @@ Enemy.prototype.render = function() {
 };
 
 
-
+//All bug objects defined as instanceOf the Enemy() constructor
+// parameters are starting X position, Y position and speed
 const bug1 = new Enemy((-101 * 15), 0, 200);
 const bug2 = new Enemy(-101, 83, 70);
 const bug3 = new Enemy((-101 * 8), 166, 130);
 const bug4 = new Enemy((-101 * 2), 166, 400);
+
+//Empty array to contain our enemies
 const allEnemies = [];
+
+//adds bugs to array for rendering
 allEnemies.push(bug1, bug2, bug3);
 
 
@@ -128,7 +129,11 @@ class Hero{
         //player position
         this.x = this.startX;
         this.y = this.startY;
+
+        //player Character/image
         this.sprite = 'images/char-boy.png';
+
+        //Game status boolean
         this.gameOver = false;
     }
 
@@ -137,35 +142,44 @@ class Hero{
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 
-
+    //Updates the game with every condition and movement,
+    //Houses most of the game functionality
     update() {
+        //Checks for collision
         for (let enemy of allEnemies) {
             if (this.y === enemy.y && (this.x < enemy.x + 70 && enemy.x + 30 < this.x + this.moveX )) {
+                //Reset player position to starting position
                 this.reset();
+
+                //Reduce live after collision
                 removeLive();
                 // removeScore();
             }
         }
 
-        //win condition
+        //win condition (if player reaches top)
         if(this.y < -18) {
-            console.log('game won');
+            //increase score
             addScore();
+            //increase level
             addLevel();
+            //reverts to start position
             this.reset();
             
+            //increases enemies speed after each win
             for (let enemy of allEnemies){
                 enemy.speed += 10;
-                console.log(enemy.speed);
             }
         }
 
+        //add a new(faster) enemy(4) when score goes above 200 when enemy(3) goes off 
+        //removes enemy(3)
         if (scoreValue > 200 && !allEnemies.includes(bug4) && bug3.x > bug3.boundary) {
             allEnemies.pop(bug3);
             allEnemies.push(bug4);
         }
 
-
+        //Game over condition(if all lives are exhausted)
         if(!lives.firstElementChild) {
             this.gameOver = true;
             toggleText();
@@ -186,7 +200,8 @@ class Hero{
         
     }
 
-    //Handles movement of player based on key press
+    //Handles movement of player based on key press and ensure 
+    //player stays within the game frame
     handleInput(input) {
         switch(input){
             case 'up':
@@ -212,28 +227,20 @@ class Hero{
         }
     }
 
+    //resets player position to start position
     reset() {
         this.x = this.startX;
         this.y = this.startY;
     }
-
-
-    checkScore(){
-        if(this.gameOver === true){
-            console.log('yeah');
-        } else {
-            console.log("nay");
-        }
-    }
 }
 
-
+//Instantiating player
 const player = new Hero();
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
 
 
+function restart () {
+    player.gameOver = false;
+}
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

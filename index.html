@@ -21,7 +21,7 @@
             </article>
             <article id="gameOver" class="hide">
                 <h1>Game Over</h1>
-                <button type="reset" class="btn">Restart</button>
+                <button type="reset" class="btn" onclick="restart()">Restart</button>
             </article>
         </div>
     </div>
@@ -32,13 +32,13 @@
             <span>Level</span>
         </div>
         <div class="stats" id="stats">
-            <div id="score"></div>
+            <div id="score">0</div>
             <div id="lives">
                 <img src="images/Heart.png" class="live">
                 <img src="images/Heart.png" class="live">
                 <img src="images/Heart.png" class="live" id="live">
             </div>
-            <div id="level"></div>
+            <div id="level">1</div>
         </div>
     </main>
     <script src="js/resources.js"></script>
