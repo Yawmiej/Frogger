@@ -167,7 +167,7 @@ class Hero{
         }
 
         //win condition (if player reaches top)
-        if(this.y < -18) {
+        if(this.y < 0) {
             //increase score
             addScore();
             //increase level
