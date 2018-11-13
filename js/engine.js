@@ -22,9 +22,8 @@ var Engine = (function(global) {
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
-        lastTime,
-        id;
-
+        lastTime;
+        
     canvas.width = 505;
     canvas.height = 606;
     doc.body.appendChild(canvas);
@@ -57,13 +56,7 @@ var Engine = (function(global) {
          * function again as soon as the browser is able to draw another frame.
          */
         
-        if(player.gameOver === false) {
-            id = win.requestAnimationFrame(main);
-        } else {
-            win.cancelAnimationFrame(id);
-            toggleText();
-            toggleModal();
-        }
+        win.requestAnimationFrame(main);
     }
 
     /* This function does some initial setup that should only occur once,
@@ -170,7 +163,7 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset (){
-        let resetButton = document.getElementById('restart');
+        /*let resetButton = document.getElementById('restart');
         resetButton.addEventListener('click', function(){
             toggleModal();
             player.reset();
@@ -180,7 +173,7 @@ var Engine = (function(global) {
             score.innerHTML = scoreValue;
             level.innerHTML = levelValue;
             lives.innerHTML = liveValue;
-        });
+        });*/
     }
     
     

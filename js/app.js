@@ -1,10 +1,22 @@
+/*TODO: Add lives
+        Set game over functionality
+        Display gameover modal
+        Implement reset
+        Display Stats on modal
+        Display Stats on Canvas to avoid scrolling
+        Add Gems and lives
+        Add select character 
+*/
+      
+
+
 let score = document.getElementById('score');
 let scoreValue = parseInt(score.innerHTML);
 let level = document.getElementById('level');
 let levelValue = parseInt(level.innerHTML);
 let startButton = document.getElementById('start');
-let lives = document.getElementById('lives');
-let liveValue = parseInt(lives.innerHTML);
+// let lives = document.getElementById('lives');
+// let liveValue = parseInt(lives.innerHTML);
 
 
 //toggle modal on button click
@@ -19,12 +31,12 @@ startButton.addEventListener('click', function(){
 });
 
 //changes  text on modal
-function toggleText() {
-    let startTalk = document.getElementById('startTalk');
-    let overTalk = document.getElementById('gameOver');
-    startTalk.classList.toggle('hide');
-    overTalk.classList.toggle('hide');
-}
+// function toggleText() {
+//     let startTalk = document.getElementById('startTalk');
+//     let overTalk = document.getElementById('gameOver');
+//     startTalk.classList.toggle('hide');
+//     overTalk.classList.toggle('hide');
+// }
 
 
 //increase score
@@ -42,11 +54,11 @@ function addLevel() {
 }
 
 
-//decrease lives after collision
-function removeLive() {
-    liveValue--;
-    lives.innerHTML = liveValue;
-}
+//decrease lives after collision(TODO)
+// function removeLive() {
+//     liveValue--;
+//     lives.innerHTML = liveValue;
+// }
 
 // add live when gem is collected (no Gem yet)
 // function addLive() {
@@ -148,8 +160,8 @@ class Hero{
                 //Reset player position to starting position
                 this.reset();
 
-                //Reduce live after collision
-                removeLive();
+                //Reduce live after collision(TODO)
+                // removeLive();
                 // removeScore();
             }
         }
@@ -187,16 +199,10 @@ class Hero{
         }
         
 
-        //Game over condition(if all lives are exhausted)
-        if(liveValue === 0) {
-            this.gameOver = true;
-        }
-
-        // TODO: Display gameover modal
-        //       Implement reset
-        //       Organize and comment code
-        //       Write documentation
-        //       Submit the damn thing
+        // //Game over condition(if all lives are exhausted)(TODO)
+        // if(liveValue === 0) {
+        //     this.gameOver = true;
+        // }
 
 
         /* if(levelValue === 10 || levelValue === 21 || levelValue === 35) {
