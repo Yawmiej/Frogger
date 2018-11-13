@@ -1,6 +1,48 @@
-frontend-nanodegree-arcade-game
-===============================
+# Arcade Game
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+## Table of Content
+- [About](#About)
+- [Installation](#Installation)
+- [Instruction](#Instruction)
+- [Link](#Link)
+- [Dependencies](#Dependencies)
+- [Contributing](#Contributing)
+- [Credits](#Credits)
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+## About
+
+The Arcade game is a classic fun game that challenge you to dodge bugs and reach the water
+
+## Installation
+
+1. Clone or Download repository https://github.com/Yawmiej/Frogger.git
+
+2. if Zipped, Unzip the folder
+3. Open index.html in browser
+4. Alterntively, play game at [yawmiej.github.io/Frogger](yawmiej.github.io/Frogger)
+
+## Instruction
+
+1.  Click 'Start' to begin the game
+2.  Use the arrow keys to move player
+3.  Dodge bugs on your way to get to the top
+4.  Get to the water to increase score and level
+5.  Bug speed increases as level increases and at certain score points
+
+## Link
+
+This project is available at [here](https://yawmiej.github.io/Frogger)
+
+## Dependencies
+
+* HTML
+* CSS
+* JavaScript (OOP)
+
+## Contributing
+
+For contributions, contact yomlateef@yahoo.com
+
+## Credits
+[Matthew Cranford](matthewcranford.com)
+[Udacity](udacity.com)
