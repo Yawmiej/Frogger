@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> Frogger</title>
+    <title>Frogger</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -17,11 +17,11 @@
                     Game restarts at every win and difficulty increases<br>
                 </p>
                 <p>Click 'Start' to start game</p>
-                <button type="button" class="btn" id="start" onclick="toggleModal()">Start</button>
+                <button type="button" class="btn" id="start">Start</button>
             </article>
             <article id="gameOver" class="hide">
                 <h1>Game Over</h1>
-                <button type="reset" class="btn" onclick="restart()">Restart</button>
+                <button type="reset" class="btn" id='restart'>Restart</button>
             </article>
         </div>
     </div>
@@ -33,10 +33,8 @@
         </div>
         <div class="stats" id="stats">
             <div id="score">0</div>
-            <div id="lives">
-                <img src="images/Heart.png" class="live">
-                <img src="images/Heart.png" class="live">
-                <img src="images/Heart.png" class="live" id="live">
+            <div>
+                <span id="lives">3</span>
             </div>
             <div id="level">1</div>
         </div>

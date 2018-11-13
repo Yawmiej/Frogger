@@ -57,10 +57,12 @@ var Engine = (function(global) {
          * function again as soon as the browser is able to draw another frame.
          */
         
-        if(player.gameOver === true) {
-            win.cancelAnimationFrame(id);
-        } else {
+        if(player.gameOver === false) {
             id = win.requestAnimationFrame(main);
+        } else {
+            win.cancelAnimationFrame(id);
+            toggleText();
+            toggleModal();
         }
     }
 
@@ -151,6 +153,7 @@ var Engine = (function(global) {
      * tick. Its purpose is to then call the render functions you have defined
      * on your enemy and player entities within app.js
      */
+    
     function renderEntities() {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
@@ -166,9 +169,21 @@ var Engine = (function(global) {
      * handle game reset states - maybe a new game menu or a game over screen
      * those sorts of things. It's only called once by the init() method.
      */
-    function reset() {
-        // noop
+    function reset (){
+        let resetButton = document.getElementById('restart');
+        resetButton.addEventListener('click', function(){
+            toggleModal();
+            player.reset();
+            scoreValue = 0;
+            levelValue = 1;
+            liveValue = 3;
+            score.innerHTML = scoreValue;
+            level.innerHTML = levelValue;
+            lives.innerHTML = liveValue;
+        });
     }
+    
+    
 
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when

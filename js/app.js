@@ -1,8 +1,22 @@
+let score = document.getElementById('score');
+let scoreValue = parseInt(score.innerHTML);
+let level = document.getElementById('level');
+let levelValue = parseInt(level.innerHTML);
+let startButton = document.getElementById('start');
+let lives = document.getElementById('lives');
+let liveValue = parseInt(lives.innerHTML);
+
+
 //toggle modal on button click
 function toggleModal() {
     let modal = document.getElementById('modContainer');
     modal.classList.toggle('hide');
 }
+
+
+startButton.addEventListener('click', function(){
+    toggleModal();
+});
 
 //changes  text on modal
 function toggleText() {
@@ -12,8 +26,6 @@ function toggleText() {
     overTalk.classList.toggle('hide');
 }
 
-let score = document.getElementById('score');
-let scoreValue = parseInt(score.innerHTML);
 
 //increase score
 function addScore() {
@@ -22,17 +34,6 @@ function addScore() {
 }
 
 
-// function removeScore() {
-//     if(scoreValue > 0 && scoreValue >= 20){
-//         scoreValue -= 20;
-//     } else if(scoreValue < 20) {
-//         scoreValue = 0;
-//     }
-//     score.innerHTML = scoreValue;
-// }
-
-let level = document.getElementById('level');
-let levelValue = parseInt(level.innerHTML);
 
 //increase level after each win
 function addLevel() {
@@ -41,22 +42,17 @@ function addLevel() {
 }
 
 
-let lives = document.getElementById('lives');
-
 //decrease lives after collision
 function removeLive() {
-    if(lives.firstElementChild){
-        lives.removeChild(lives.firstElementChild);
-    }
+    liveValue--;
+    lives.innerHTML = liveValue;
 }
 
-
+// add live when gem is collected (no Gem yet)
 // function addLive() {
 //     let live = document.getElementById('live');
 //     lives.appendChild(live);
 // }
-
-let gameOver = false;
 
 
 // Enemies our player must avoid
@@ -104,7 +100,7 @@ Enemy.prototype.render = function() {
 const bug1 = new Enemy((-101 * 15), 0, 200);
 const bug2 = new Enemy(-101, 83, 70);
 const bug3 = new Enemy((-101 * 8), 166, 130);
-const bug4 = new Enemy((-101 * 2), 166, 400);
+const bug4 = new Enemy((-101 * 12), 83, 350);
 
 //Empty array to contain our enemies
 const allEnemies = [];
@@ -147,7 +143,8 @@ class Hero{
     update() {
         //Checks for collision
         for (let enemy of allEnemies) {
-            if (this.y === enemy.y && (this.x < enemy.x + 70 && enemy.x + 30 < this.x + this.moveX )) {
+            if (this.y === enemy.y && (this.x < enemy.x + 70 &&
+                enemy.x + 30 < this.x + this.moveX )) {
                 //Reset player position to starting position
                 this.reset();
 
@@ -172,18 +169,27 @@ class Hero{
             }
         }
 
-        //add a new(faster) enemy(4) when score goes above 200 when enemy(3) goes off 
-        //removes enemy(3)
-        if (scoreValue > 200 && !allEnemies.includes(bug4) && bug3.x > bug3.boundary) {
-            allEnemies.pop(bug3);
-            allEnemies.push(bug4);
+        //Increase enemy speed at interval (bugged)
+        // let newSpeed = bug2.speed + 150;
+        // for (let i = 1, interv = 250; i < 6; i++) {
+        //     let interval = i * interv;
+        //     if (scoreValue === interval && bug2.speed !== newSpeed && bug2.x > bug2.boundary) {
+        //         bug2.speed = newSpeed;
+        //         console.log(bug2.speed);
+        //     }
+        // }
+
+
+        // Substitutes a faster bug for another when score exceeds 250 and the bug is out 
+        // of sight
+        if (scoreValue > 250 && bug2.x > bug2.boundary && !allEnemies.includes(bug4)) {
+                allEnemies.splice(1, 1, bug4);
         }
+        
 
         //Game over condition(if all lives are exhausted)
-        if(!lives.firstElementChild) {
+        if(liveValue === 0) {
             this.gameOver = true;
-            toggleText();
-            toggleModal();
         }
 
         // TODO: Display gameover modal
@@ -193,10 +199,9 @@ class Hero{
         //       Submit the damn thing
 
 
-        // if(levelValue === 10 || levelValue === 21 || levelValue === 35) {
-        //     addLive();
-        // }
-
+        /* if(levelValue === 10 || levelValue === 21 || levelValue === 35) {
+            addLive();
+         }*/
         
     }
 
@@ -238,9 +243,7 @@ class Hero{
 const player = new Hero();
 
 
-function restart () {
-    player.gameOver = false;
-}
+
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
