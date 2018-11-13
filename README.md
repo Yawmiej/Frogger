@@ -44,5 +44,5 @@ This project is available at [here](https://yawmiej.github.io/Frogger)
 For contributions, contact yomlateef@yahoo.com
 
 ## Credits
-[Matthew Cranford](matthewcranford.com)
-[Udacity](udacity.com)
+* [Matthew Cranford](matthewcranford.com)
+* [Udacity](udacity.com)
